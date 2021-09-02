@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PhotoController;
 use App\Models\Photo;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,5 @@ Route::get('/', function () {
     $photo = Photo::all();
     return view('pages.home', compact('photo'));
 });
+
+Route::resource("/photos", PhotoController::class);
