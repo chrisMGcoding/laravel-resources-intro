@@ -15,7 +15,7 @@ class PhotoController extends Controller
     public function index()
     {
         $photo = Photo::all();
-        return view('pages.home', compact('photos'));
+        return view('pages.home', compact('photo'));
     }
 
     /**
@@ -45,7 +45,7 @@ class PhotoController extends Controller
 
         $photo->save();
 
-        return redirect()->name('photos.index');
+        return redirect()->route('photos.index');
     }
 
     /**
@@ -85,7 +85,7 @@ class PhotoController extends Controller
 
         $photo->save();
 
-        return redirect()->name('photos.index');
+        return redirect()->route('photos.index');
     }
 
     /**
@@ -98,6 +98,6 @@ class PhotoController extends Controller
     {
         $photo->delete();
 
-        return redirect()->name('photos.index');
+        return redirect()->route('photos.index');
     }
 }

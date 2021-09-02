@@ -6,28 +6,7 @@
 
     <h1>Photos</h1>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <form action="" method="post">
-    @csrf
-
-        {{-- <label class="mt-2 mb-2" for="">Nom bâtiment :</label>
-        <input type="text" name="titre" id="" value="{{old('')}}">
-                <br>
-        <label class="mt-2 mb-2" for="">Description :</label>
-        <input type="text" name="description" id="" value="{{old('')}}">
-                <br> --}}
-        <button class="m-2 rounded bg-primary" type="submit">Ajouter</button>
-
-    </form>
+    <a class="m-2 rounded bg-primary text-dark" href="{{ route('photos.create')}}">Ajouter</a>
 
 </div>
 
@@ -56,14 +35,15 @@
                 <td>{{($item->description)}}</td>
                 <td>
                     <div class="d-flex">
-                        <form action="" method="post">
+                        <form action="{{ route('photos.destroy', $item->id) }}" method="post">
+                            @method('DELETE')
                             @csrf
                             <button class="rounded m-3 bg-danger" type="submit">Delete</button>
                         </form>
 
-                        <button class="rounded m-3 bg-warning"><a class="text-decoration-none text-dark" href="">Show</a></button>
+                        <button class="rounded m-3 bg-warning"><a class="text-decoration-none text-dark" href="{{ route('photos.show', $item->id)}}">Show</a></button>
 
-                        <button class="rounded m-3 bg-success"><a class="text-decoration-none text-dark" href="">Update</a></button>
+                        <button class="rounded m-3 bg-success"><a class="text-decoration-none text-dark" href="{{ route('photos.edit', $item->id)}}">Update</a></button>
                     </div>
                 </td>
             </tr>
