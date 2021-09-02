@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\PhotoController;
+use App\Models\Album;
 use App\Models\Photo;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +23,10 @@ Route::get('/', function () {
 });
 
 Route::resource("/photos", PhotoController::class);
+
+Route::resource('/albums', AlbumController::class);
+
+Route::get('/album', function () {
+    $album = Album::all();
+    return view('auteur.home', compact('album'));
+});
