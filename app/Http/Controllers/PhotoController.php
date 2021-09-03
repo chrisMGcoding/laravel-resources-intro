@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
@@ -39,11 +40,13 @@ class PhotoController extends Controller
     {
         $photo = new Photo;
 
-        $photo->url = $request->url;
+        $photo->url = $request->file("url")->hashName();
         $photo->name = $request->name;
         $photo->description = $request->description;
 
         $photo->save();
+
+        $request->file("url")->storePublicly("img", "public");
 
         return redirect()->route('photos.index');
     }
@@ -79,11 +82,15 @@ class PhotoController extends Controller
      */
     public function update(Request $request, Photo $photo)
     {
-        $photo->url = $request->url;
+        Storage::disk('public')->delete('img/'. $photo->url);
+
+        $photo->url = $request->file('url')->hashName();
         $photo->name = $request->name;
         $photo->description = $request->description;
 
         $photo->save();
+
+        $request->file('url')->storePublicly('img', 'public');
 
         return redirect()->route('photos.index');
     }
@@ -96,6 +103,8 @@ class PhotoController extends Controller
      */
     public function destroy(Photo $photo)
     {
+        Storage::disk('public')->delete('img/' . $photo->url);
+
         $photo->delete();
 
         return redirect()->route('photos.index');

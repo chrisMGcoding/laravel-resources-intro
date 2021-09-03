@@ -55,11 +55,6 @@
 
     </table>
 
-
-
-
-
-
     </div>
 
 @endsection

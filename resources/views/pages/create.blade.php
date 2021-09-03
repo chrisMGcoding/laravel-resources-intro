@@ -4,11 +4,11 @@
 
     <h1 class="text-center my-3">Créer photo</h1>
 
-    <form action="{{ route('photos.store') }}" method="post">
+    <form action="{{ route('photos.store') }}" method="post" enctype="multipart/form-data">
     @csrf
         <div class="mb-3">
           <label class="form-label">URL</label>
-          <input class="form-control" type="text" name="url">
+          <input type="file" class="form-control" type="text" name="url">
         </div>
         <div class="mb-3">
           <label class="form-label">Name</label>
